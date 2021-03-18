@@ -32,8 +32,12 @@ async function scrapePage(i) {
         i++;
     }
 
-    let searchQuery = 'frontend'
-    let filteredData = rows.filter(data => data.title.toLowerCase().includes(searchQuery))
+    let sortedByDate = rows.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+    });
+
+    let searchQuery = 'frontend';
+    let filteredData = sortedByDate.filter(data => data.title.toLowerCase().includes(searchQuery));
 
     const sheet = new Sheet();
     await sheet.load();
